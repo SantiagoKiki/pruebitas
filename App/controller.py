@@ -31,12 +31,16 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller():
+def new_controller()->dict:
     """
     Crea una instancia del modelo
     """
     #TODO: Llamar la función del modelo que crea las estructuras de datos
-    pass
+    control = {
+        'model': None
+    }
+    control['model'] = model.new_data_structs()
+    return control
 
 
 # Funciones para la carga de datos
@@ -46,7 +50,16 @@ def load_data(control, filename):
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
-    pass
+    data_model = control['model']
+    datos_a_anadir = load_file_data(data_model,filename)
+    return datos_a_anadir
+
+def load_file_data(data_structure,filename):
+    booksfile = cf.data_dir + filename
+    input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
+    for book in input_file:
+        model.add_data(data_structure, book)
+    return model.data_size(data_structure)
 
 
 # Funciones de ordenamiento

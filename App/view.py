@@ -38,15 +38,17 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controller()->None:
     """
         Se crea una instancia del controlador
     """
     #TODO: Llamar la función del controlador donde se crean las estructuras de datos
-    pass
+    control = controller.new_controller()
+    return control
 
 
-def print_menu():
+
+def print_menu()->None:
     print("Bienvenido")
     print("1- Cargar información")
     print("2- Ejecutar Requerimiento 1")
@@ -60,12 +62,13 @@ def print_menu():
     print("0- Salir")
 
 
-def load_data(control):
+def load_data(control, filename:str):
     """
     Carga los datos
     """
     #TODO: Realizar la carga de datos
-    pass
+    datos = controller.load_data(control,filename)
+    return datos
 
 
 def print_data(control, id):
@@ -138,10 +141,9 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
-
 # Se crea el controlador asociado a la vista
 control = new_controller()
-
+print(control)
 # main del reto
 if __name__ == "__main__":
     """
@@ -155,7 +157,7 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
-                data = load_data(control)
+                data = load_data(control,'DIAN/Salida_agregados_renta_juridicos_AG-small.csv' )
             elif int(inputs) == 2:
                 print_req_1(control)
 
