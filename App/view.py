@@ -38,7 +38,7 @@ operación solicitada
 """
 
 
-def new_controller()->None:
+def new_controller():
     """
         Se crea una instancia del controlador
     """
@@ -157,7 +157,20 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
-                data = load_data(control,'DIAN/Salida_agregados_renta_juridicos_AG-small.csv' )
+                data = load_data(control,'DIAN/Salida_agregados_renta_juridicos_AG-small.csv')
+                print("se cargaron " + str(controller.data_size(data["datos"])) + " columnas.")
+                headers = controller.first_last_elements(data["datos"])[0]["elements"][1].keys()
+                rows = []
+                for lista in range(2):
+                    for dato in controller.calliterator(controller.first_last_elements(data["datos"])[lista]):
+                        rows.append(dato.values())
+                x = list(headers)
+                y = list(rows)
+                print(tabulate([x,y],headers='firstrow' ,tablefmt='rst'))
+
+
+                #for dato in controller.first_last_elements(data["datos"])[0]["elements"]:
+                 #   print(dato)
             elif int(inputs) == 2:
                 print_req_1(control)
 

@@ -64,7 +64,7 @@ def add_data(data_structs, data):
     Función para agregar nuevos elementos a la lista
     """
     #TODO: Crear la función para agregar elementos a una lista
-    lt.addLast(data_structs,data)
+    lt.addLast(data_structs['datos'],data)
     return data_structs
 
 
@@ -93,8 +93,15 @@ def data_size(data_structs):
     Retorna el tamaño de la lista de datos
     """
     #TODO: Crear la función para obtener el tamaño de una lista
-    pass
+    return lt.size(data_structs)
 
+def first_last_e(data_structs):
+    """
+    retorna los primeros 3 y los ultimos 3 elementos de la estructura de datos en listas separadas.
+    """
+    first = lt.subList(data_structs,1,3)
+    last = lt.subList(data_structs,lt.size(data_structs)-3,3)
+    return first,last
 
 def req_1(data_structs):
     """
@@ -183,12 +190,21 @@ def sort_criteria(data_1, data_2):
         _type_: _description_
     """
     #TODO: Crear función comparadora para ordenar
-    pass
+    if (float(data_1['Año']) < float(data_2['Año'])):
+        return True 
+    elif (float(data_1['Año']) > float(data_2['Año'])):
+        return False
+    else:
+        if data_1["Código actividad económica"] > data_2["Código actividad económica"]:
+            return True
+
 
 
 def sort(data_structs):
     """
     Función encargada de ordenar la lista con los datos
     """
-    #TODO: Crear función de ordenamiento
-    pass
+    sa.sort(data_structs['datos'],sort_criteria)
+    
+def iterator(datastructure):
+    return lt.iterator(datastructure)

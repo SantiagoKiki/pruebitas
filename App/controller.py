@@ -52,27 +52,38 @@ def load_data(control, filename):
     # TODO: Realizar la carga de datos
     data_model = control['model']
     datos_a_anadir = load_file_data(data_model,filename)
+    sort(data_model)
     return datos_a_anadir
 
 def load_file_data(data_structure,filename):
-    booksfile = cf.data_dir + filename
-    input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
-    for book in input_file:
-        model.add_data(data_structure, book)
-    return model.data_size(data_structure)
-
-
+    data_file = cf.data_dir + filename
+    input_file = csv.DictReader(open(data_file, encoding='utf-8'))
+    for person in input_file:
+        model.add_data(data_structure,person)
+    return data_structure
+def data_size(data_structure):
+    """
+    retorna el tamaño de la estructura de datos
+    """
+    size = model.data_size(data_structure)
+    return size
+def first_last_elements(data_structure):
+    return model.first_last_e(data_structure)
 # Funciones de ordenamiento
 
-def sort(control):
+def sort(data_model):
     """
     Ordena los datos del modelo
     """
     #TODO: Llamar la función del modelo para ordenar los datos
-    pass
+    sorted_model = model.sort(data_model)
+    return sorted_model
 
 
 # Funciones de consulta sobre el catálogo
+
+def calliterator(datastructure):
+    return model.iterator(datastructure)
 
 def get_data(control, id):
     """
