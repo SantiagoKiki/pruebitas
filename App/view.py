@@ -70,6 +70,24 @@ def load_data(control, filename:str):
     datos = controller.load_data(control,filename)
     return datos
 
+def rows_values(first_last_elements,headers):
+    rows = []
+    for dict in first_last_elements:
+        for values in  dict['elements']:
+            to_add = []
+            for key_value in values.items():
+                if key_value[0] in headers:
+                    to_add.append(key_value[1])
+                if len(to_add) == 11:
+                    rows.append(to_add)
+    return(rows)
+    #primeros_ultimos = controller.first_last_elements(load_data[data_loc])
+    #for lista in range(2):
+      #  for dato in controller.calliterator(primeros_ultimos[lista]):
+     #       rows.append(dato.values())
+    elements = first_last_elements
+    
+
 
 def print_data(control, id):
     """
@@ -159,18 +177,21 @@ if __name__ == "__main__":
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control,'DIAN/Salida_agregados_renta_juridicos_AG-small.csv')
                 print("se cargaron " + str(controller.data_size(data["datos"])) + " columnas.")
-                headers = controller.first_last_elements(data["datos"])[0]["elements"][1].keys()
-                rows = []
-                for lista in range(2):
-                    for dato in controller.calliterator(controller.first_last_elements(data["datos"])[lista]):
-                        rows.append(dato.values())
-                x = list(headers)
-                y = list(rows)
-                print(tabulate([x,y],headers='firstrow' ,tablefmt='rst'))
+                header_s = ["Año","Código actividad económica","Nombre actividad económica","Código sector económico","Nombre sector económico","Código subsector económico","Nombre subsector económico","Total ingresos netos","Total costos y gastos","Total saldo a pagar","Total saldo a favor"]
+                rows = rows_values(controller.first_last_elements(data["datos"]),header_s)
+                
+                #print(controller.first_last_elements(data["datos"])[0])
+                headers1 = ["año","codigo","nombre"]
+                rows1 = (["2012",1,1],["2013",2,2],["2014",3,3])
+                print("\n","\n","\n","\n","\n","\n","\n")
+                print(headers1)
+                print(header_s)
+                print(rows1)
+                print(rows)
+                print("\n","\n","\n","\n","\n","\n","\n")
+                print(tabulate(rows1,headers1))
+                print(tabulate(rows,header_s,tablefmt="grid",maxcolwidths= 11,maxheadercolwidths=8))
 
-
-                #for dato in controller.first_last_elements(data["datos"])[0]["elements"]:
-                 #   print(dato)
             elif int(inputs) == 2:
                 print_req_1(control)
 

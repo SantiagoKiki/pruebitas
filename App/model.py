@@ -195,7 +195,7 @@ def sort_criteria(data_1, data_2):
     elif (float(data_1['Año']) > float(data_2['Año'])):
         return False
     else:
-        if data_1["Código actividad económica"] > data_2["Código actividad económica"]:
+        if data_1["Código actividad económica"] < data_2["Código actividad económica"]:
             return True
 
 
