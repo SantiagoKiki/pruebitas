@@ -27,10 +27,10 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-from tabulate import tabulate
+#from tabulate import tabulate
 import traceback
 
-"""
+""" 
 La vista se encarga de la interacción con el usuario
 Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
@@ -38,15 +38,17 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controllers(data_types):
     """
         Se crea una instancia del controlador
     """
     #TODO: Llamar la función del controlador donde se crean las estructuras de datos
-    control = controller.new_controller()
+    control = controller.new_controller(data_types)
     return control
 
-
+def set_catalog_data_type(control,datatype_to_use):
+    if control['model']['datos']['size'] == 0:
+        return datatype_to_use
 
 def print_menu()->None:
     print("Bienvenido")
@@ -59,6 +61,7 @@ def print_menu()->None:
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
+    print("10 seleccionar el tipo de representación de la lista (ARRAY_LIST o LINKED_LIST)")
     print("0- Salir")
 
 
@@ -80,14 +83,6 @@ def rows_values(first_last_elements,headers):
                     to_add.append(key_value[1])
                 if len(to_add) == 11:
                     rows.append(to_add)
-    return(rows)
-    #primeros_ultimos = controller.first_last_elements(load_data[data_loc])
-    #for lista in range(2):
-      #  for dato in controller.calliterator(primeros_ultimos[lista]):
-     #       rows.append(dato.values())
-    elements = first_last_elements
-    
-
 
 def print_data(control, id):
     """
@@ -160,8 +155,9 @@ def print_req_8(control):
     pass
 
 # Se crea el controlador asociado a la vista
-control = new_controller()
-print(control)
+
+data_type = "ARRAY_LIST"
+control = new_controllers(data_type)
 # main del reto
 if __name__ == "__main__":
     """
@@ -179,19 +175,8 @@ if __name__ == "__main__":
                 print("se cargaron " + str(controller.data_size(data["datos"])) + " columnas.")
                 header_s = ["Año","Código actividad económica","Nombre actividad económica","Código sector económico","Nombre sector económico","Código subsector económico","Nombre subsector económico","Total ingresos netos","Total costos y gastos","Total saldo a pagar","Total saldo a favor"]
                 rows = rows_values(controller.first_last_elements(data["datos"]),header_s)
-                
-                #print(controller.first_last_elements(data["datos"])[0])
-                headers1 = ["año","codigo","nombre"]
-                rows1 = (["2012",1,1],["2013",2,2],["2014",3,3])
-                print("\n","\n","\n","\n","\n","\n","\n")
-                print(headers1)
-                print(header_s)
-                print(rows1)
-                print(rows)
-                print("\n","\n","\n","\n","\n","\n","\n")
-                print(tabulate(rows1,headers1))
-                print(tabulate(rows,header_s,tablefmt="grid",maxcolwidths= 11,maxheadercolwidths=8))
-
+                #print(tabulate(rows,header_s,tablefmt="grid",maxcolwidths= 11,maxheadercolwidths=8))
+                print(controller.first_last_elements(data["datos"]))
             elif int(inputs) == 2:
                 print_req_1(control)
 
@@ -213,9 +198,22 @@ if __name__ == "__main__":
             elif int(inputs) == 8:
                 print_req_7(control)
 
-            elif int(inputs) == 9:
-                print_req_8(control)
-
+            elif int(inputs) == 10:        
+                data_type = input("ingrese el tipo de dato que quiere usar. \n Ingrese 1 para ARRAY_LIST \n Ingrese 2 para LINKED_LIST \n")
+                if int(data_type) == 1:
+                    data_type = "ARRAY_LIST"
+                elif int(data_type) == 2:
+                    data_type = "SINGLE_LINKED"
+                else:
+                    print("Ingrese una opción válida.")
+                muestra = input("Ingrese 1 para ingresar un tamaño de muestra para el catálogo \n ingrese 2 para ingresar el sufijo del archivo que desea cargar ((ej.: -20pct, -50pct, -large) en el catálogo")
+                if muestra[0]  = 0:
+                    t = c 
+                small_control = new_controllers(data_type)
+                print("\n ha cargado la estuctura de datos de tipo " + small_control["model"]["datos"]["type"] +" correctamente. \n" )
+                ord = input("Seleccione el tipo de rodenamiento que quiere utilizar; \n 1 -> Selection Sort \n 2 -> Insertion \n 3-> Shell \n")
+                
+                    
             elif int(inputs) == 0:
                 working = False
                 print("\nGracias por utilizar el programa")
