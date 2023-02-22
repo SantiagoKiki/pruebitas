@@ -213,7 +213,10 @@ def sortby(control_model, sort_met):
         ins.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
     elif sort_met == "Shell Sort":
         sa.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
-    
-    
+    elif sort_met == "Quick Sort":
+        quk.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
+    elif sort_met == "Merge Sort":
+        merg.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
+
 def iterator(datastructure):
     return lt.iterator(datastructure)

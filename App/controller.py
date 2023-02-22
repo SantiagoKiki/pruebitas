@@ -66,6 +66,7 @@ def load_databy(control,filename,sort_met):
     start_time = get_time()
     data_model = control["model"]
     datos_a_anadir = load_file_data(data_model, filename)
+    model.sortby(data_model, sort_met)
     end_time = get_time()
     delta_time = deltaTime(start_time, end_time)
     return delta_time, datos_a_anadir

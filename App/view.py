@@ -238,13 +238,17 @@ if __name__ == "__main__":
                 else:
                     print("ingrese una opción válida")
 
-                orden = input("Seleccione el tipo de rodenamiento que quiere utilizar; \n 1 -> Selection Sort \n 2 -> Insertion sort \n 3-> Shell sort \n")
+                orden = input("Seleccione el tipo de rodenamiento que quiere utilizar; \n 1 -> Selection Sort \n 2 -> Insertion sort \n 3-> Shell sort \n 4-> Quick Sort \n 5-> Merge Sort\n")
                 if int(orden) == 1:
                     sort_metd = "Selection Sort"
                 elif int(orden) == 2:
                     sort_metd = "Insertion sort"
                 elif int(orden)==3: 
                     sort_metd = "Shell sort"
+                elif int(orden)==4:
+                    sort_metd = "Quick Sort"
+                elif int(orden)==5:
+                    sort_metd = "Merge Sort"
                 else:
                     print("Ingrese una opción de Sort válida")
                 
