@@ -66,13 +66,9 @@ def load_databy(control,filename,sort_met):
     start_time = get_time()
     data_model = control["model"]
     datos_a_anadir = load_file_data(data_model, filename)
-    sorted_by = model.sortby(data_model,sort_met)
     end_time = get_time()
     delta_time = deltaTime(start_time, end_time)
-    retorno = []
-    retorno.append(sorted_by)
-    retorno.append(delta_time)
-    return retorno
+    return delta_time, datos_a_anadir
 
 
 def data_size(data_structure):
@@ -176,10 +172,10 @@ def get_time():
     """
     devuelve el instante tiempo de procesamiento en milisegundos
     """
-    return float(time.perf_counter()*10000)
+    return float(time.perf_counter()*1000)
 
 
-def delta_time(start, end):
+def deltaTime(start, end):
     """
     devuelve la diferencia entre tiempos de procesamiento muestreados
     """

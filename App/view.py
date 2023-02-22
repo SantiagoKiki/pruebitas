@@ -80,7 +80,7 @@ def load_databy(control, filename:str,sort_met):
     Carga los datos
     """
     #TODO: Realizar la carga de datos
-    datos = controller.load_data(control,filename)
+    datos = controller.load_databy(control,filename,sort_met)
     return datos
 
 def rows_values(first_last_elements,headers):
@@ -222,6 +222,7 @@ if __name__ == "__main__":
                 muestra = input("Ingrese 1 para ingresar un tamaño de muestra para el catálogo \nIngrese 2 para ingresar el sufijo del archivo que desea cargar ((ej.: -20pct.csv, -50pct.csv, -large.csv) en el catálogo \n")
                 tamanio = 0
                 file_size_sufijo = None
+                sort_metd = None
                 file_name = "DIAN/Salida_agregados_renta_juridicos_AG"
                 if int(muestra) ==1:
                     tamanio = int(input("ingrese el tamaño de la meustra que desea cargar: "))
@@ -233,11 +234,11 @@ if __name__ == "__main__":
                     file_size_sufijo = input("\ningrese el sufijo del archivo que sea cargar para la muestra (ej.: -20pct.csv, -50pct.csv, -large.csv): ")
                     file_name = file_name + file_size_sufijo 
                     print("\nha cargado el archivo "+ file_name + " correctamente\n")
+                    
                 else:
                     print("ingrese una opción válida")
 
                 orden = input("Seleccione el tipo de rodenamiento que quiere utilizar; \n 1 -> Selection Sort \n 2 -> Insertion sort \n 3-> Shell sort \n")
-                sort_metd = None
                 if int(orden) == 1:
                     sort_metd = "Selection Sort"
                 elif int(orden) == 2:
@@ -246,10 +247,11 @@ if __name__ == "__main__":
                     sort_metd = "Shell sort"
                 else:
                     print("Ingrese una opción de Sort válida")
+                
 
                 data1 = load_databy(small_control, file_name,sort_metd)
-                print(len(data1))
-                print(type(data1))
+                print("Tiempo de ejecución para el archivo " + file_name  + " usando " + sort_metd + " : " + str(round(data1[0],3))+ " ms")
+
                 
             
                    
