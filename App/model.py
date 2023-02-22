@@ -44,7 +44,7 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 
 
-def new_data_structs()->list:
+def new_data_structs(new_datatype)->list:
     """
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
@@ -53,7 +53,7 @@ def new_data_structs()->list:
     data ={
         'datos':None
     }
-    data['datos'] = lt.newList('ARRAY_LIST')
+    data['datos'] = lt.newList(new_datatype)
     return data
 
 
@@ -100,7 +100,7 @@ def first_last_e(data_structs):
     retorna los primeros 3 y los ultimos 3 elementos de la estructura de datos en listas separadas.
     """
     first = lt.subList(data_structs,1,3)
-    last = lt.subList(data_structs,lt.size(data_structs)-3,3)
+    last = lt.subList(data_structs,lt.size(data_structs)-2,3)
     return first,last
 
 def req_1(data_structs):
@@ -179,7 +179,7 @@ def compare(data_1, data_2):
 # Funciones de ordenamiento
 
 
-def sort_criteria(data_1, data_2):
+def cmp_impuestos_by_anio_CAE(data_1, data_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
 
     Args:
@@ -204,7 +204,16 @@ def sort(data_structs):
     """
     Función encargada de ordenar la lista con los datos
     """
-    sa.sort(data_structs['datos'],sort_criteria)
+    sa.sort(data_structs['datos'],cmp_impuestos_by_anio_CAE)
+
+def sortby(control_model, sort_met):
+    if sort_met == "Selection Sort":
+        se.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
+    elif sort_met == "Insertion Sort":
+        ins.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
+    elif sort_met == "Shell Sort":
+        sa.sort(control_model["datos"], cmp_impuestos_by_anio_CAE)
+    
     
 def iterator(datastructure):
     return lt.iterator(datastructure)

@@ -31,7 +31,7 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller()->dict:
+def new_controller(datatypes)->dict:
     """
     Crea una instancia del modelo
     """
@@ -39,7 +39,7 @@ def new_controller()->dict:
     control = {
         'model': None
     }
-    control['model'] = model.new_data_structs()
+    control['model'] = model.new_data_structs(datatypes)
     return control
 
 
@@ -52,7 +52,7 @@ def load_data(control, filename):
     # TODO: Realizar la carga de datos
     data_model = control['model']
     datos_a_anadir = load_file_data(data_model,filename)
-    sort(data_model)
+    model.sort(data_model)
     return datos_a_anadir
 
 def load_file_data(data_structure,filename):
@@ -61,6 +61,20 @@ def load_file_data(data_structure,filename):
     for person in input_file:
         model.add_data(data_structure,person)
     return data_structure
+
+def load_databy(control,filename,sort_met):
+    start_time = get_time()
+    data_model = control["model"]
+    datos_a_anadir = load_file_data(data_model, filename)
+    sorted_by = model.sortby(data_model,sort_met)
+    end_time = get_time()
+    delta_time = deltaTime(start_time, end_time)
+    retorno = []
+    retorno.append(sorted_by)
+    retorno.append(delta_time)
+    return retorno
+
+
 def data_size(data_structure):
     """
     retorna el tamaño de la estructura de datos
@@ -162,7 +176,7 @@ def get_time():
     """
     devuelve el instante tiempo de procesamiento en milisegundos
     """
-    return float(time.perf_counter()*1000)
+    return float(time.perf_counter()*10000)
 
 
 def delta_time(start, end):
